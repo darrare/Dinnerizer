@@ -1,0 +1,405 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dinnerizer</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1046/1046750.png" />
+  <meta name="description" content="Dinnerizer helps you plan meals and find ingredients at your local Kroger store." />
+  <meta name="author" content="Your Name" />
+  <link href="https://bootswatch.com/5/sketchy/bootstrap.min.css" rel="stylesheet" />
+
+  <style>
+    body {
+      background-color: #fffbea;
+    }
+
+    h1,
+    h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .filter-container {
+      margin-bottom: 15px;
+    }
+
+    .search-bar {
+      margin-bottom: 10px;
+      padding: 8px;
+      width: 100%;
+    }
+
+    .dietary-filter {
+      margin-right: 10px;
+    }
+
+    .filters {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+      gap: 10px;
+    }
+
+    .filters input {
+      padding: 5px;
+      font-size: 1rem;
+    }
+
+    .filters .dietaryFilters {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .dietaryFilters label {
+      font-size: 0.9rem;
+    }
+
+    .recipeList {
+      max-height: 500px;
+      overflow-y: auto;
+      padding: 10px;
+    }
+
+    .recipe-card {
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .recipe-card:hover {
+      transform: scale(1.02);
+    }
+
+    .recipe-card.selected {
+      border: 2px dashed #0d6efd;
+      background-color: #f0f8ff;
+    }
+
+    .recipe-card img {
+      max-height: 150px;
+      object-fit: cover;
+    }
+
+    .recipe-card .card-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .recipe-card .card-body .card-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .recipe-card .card-body .card-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      color: #6c757d;
+    }
+
+    .recipe-card .card-body .dietaryIcons {
+      font-size: 0.9rem;
+      display: flex;
+      gap: 5px;
+    }
+
+    .selected-store {
+      background-color: #d1ecf1;
+      border-color: #bee5eb;
+    }
+
+    #ingredientsList {
+      background-color: #f8f9fa;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container py-4">
+    <h1>Dinnerizer 🍽</h1>
+
+    <!-- Filters Section -->
+    <div class="filters">
+      <input type="text" id="recipeSearch" placeholder="Search for recipes...">
+      <div class="dietaryFilters">
+        <label><input type="checkbox" id="vegetarian"> Vegetarian</label>
+        <label><input type="checkbox" id="glutenFree"> Gluten-Free</label>
+        <label><input type="checkbox" id="dairyFree"> Dairy-Free</label>
+      </div>
+    </div>
+
+    <!-- Recipe Section -->
+    <section id="recipe-section" class="mb-5">
+      <h2>Select Your Recipes</h2>
+      <div class="recipeList" id="recipes"></div>
+    </section>
+
+    <section id="store-section" class="mb-5">
+      <h2>Find Nearby Kroger Stores 🏪</h2>
+      <div class="d-grid mb-3">
+        <button class="btn btn-primary" id="locateStores">Use My Location</button>
+      </div>
+      <ul id="storeList" class="list-group mb-2"></ul>
+    </section>
+
+    <section id="results-section" class="mb-5">
+      <h2>Your In-Store Shopping List 🛒</h2>
+      <div class="d-grid mb-3">
+        <button class="btn btn-success" id="fetchIngredients">Get Ingredients</button>
+      </div>
+      <div id="ingredientsList"></div>
+    </section>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      const API_BASE = "https://dinnerizer-backend-production.up.railway.app";
+      const selectedRecipes = new Set();
+      let selectedStoreId = null;
+      let filteredRecipes = [];
+
+      // Load recipes and initialize the display
+      $.getJSON("recipes.json", function (recipes) {
+        window._recipes = recipes;
+        filteredRecipes = [...recipes];
+        renderRecipes();
+      });
+
+      // Filter recipes based on search input and dietary restrictions
+      $("#recipeSearch").on("input", function () {
+        applyFilters();
+      });
+
+      $("#vegetarian, #glutenFree, #dairyFree").on("change", function () {
+        applyFilters();
+      });
+
+      function applyFilters() {
+        const searchTerm = $("#recipeSearch").val().toLowerCase();
+        const selectedDietaryRestrictions = $(".dietaryFilters input:checked").map(function () {
+          return $(this).attr("id");
+        }).get();
+
+        filteredRecipes = window._recipes.filter(recipe => {
+          const matchesSearch = recipe.name.toLowerCase().includes(searchTerm) || recipe.description.toLowerCase().includes(searchTerm);
+          const matchesDietaryRestrictions = selectedDietaryRestrictions.every(restriction =>
+            recipe.dietaryRestrictions && recipe.dietaryRestrictions.includes(restriction)
+          );
+          return matchesSearch && (selectedDietaryRestrictions.length === 0 || matchesDietaryRestrictions);
+        });
+
+        renderRecipes();
+      }
+
+      function renderRecipes() {
+        $("#recipes").empty();
+        filteredRecipes.forEach((recipe, idx) => {
+          const col = $('<div class="col-md-4 mb-3"></div>');
+          const card = $(`  
+            <div class="card recipe-card h-100" data-index="${idx}">
+              <img src="${recipe.imageUrl}" class="card-img-top" alt="${recipe.name}" onerror="this.style.display='none'" />
+              <div class="card-body">
+                <h5 class="card-title">${recipe.name}</h5>
+                <p class="card-text text-muted">${recipe.time}</p>
+                <p class="card-text">${recipe.description}</p>
+              </div>
+            </div>
+          `);
+          card.on("click", function () {
+            const i = $(this).data("index");
+            if (selectedRecipes.has(i)) {
+              selectedRecipes.delete(i);
+              $(this).removeClass("selected");
+            } else {
+              selectedRecipes.add(i);
+              $(this).addClass("selected");
+            }
+          });
+          col.append(card);
+          $("#recipes").append(col);
+        });
+      }
+
+      // Store location and fetching ingredients logic
+      $("#locateStores").on("click", () => {
+        if (!navigator.geolocation) {
+          alert("Geolocation is not supported by your browser.");
+          return;
+        }
+
+        $("#storeList").empty().append(`<li class="list-group-item">Getting your location...</li>`);
+        navigator.geolocation.getCurrentPosition(
+          async (position) => {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            await fetchStoresByCoords(lat, lng);
+          },
+          (err) => {
+            console.error(err);
+            $("#storeList").html(`<li class="list-group-item text-danger">Unable to get your location.</li>`);
+          }
+        );
+      });
+
+      async function fetchStoresByCoords(lat, lng) {
+        $("#storeList").empty().append(`<li class="list-group-item">Searching nearby stores...</li>`);
+
+        try {
+          const res = await fetch(`${API_BASE}/stores?lat=${lat}&lng=${lng}`);
+          const data = await res.json();
+          $("#storeList").empty();
+
+          if (!data.data.length) {
+            $("#storeList").append(`<li class="list-group-item">No stores found near you.</li>`);
+            return;
+          }
+
+          data.data.forEach(store => {
+            const item = $(`<li class="list-group-item">${store.name}</li>`);
+            item.on("click", () => {
+              selectedStoreId = store.locationId;
+              $("#storeList .list-group-item").removeClass("selected-store");
+              item.addClass("selected-store");
+            });
+            $("#storeList").append(item);
+          });
+        } catch (err) {
+          console.error(err);
+          $("#storeList").html(`<li class="list-group-item text-danger">Failed to fetch stores.</li>`);
+        }
+      }
+
+      // Fetching ingredients and handling product search
+      $("#fetchIngredients").on("click", async () => {
+        if (!selectedStoreId) {
+          alert("Please select a store first.");
+          return;
+        }
+
+        const selectedIndices = Array.from(selectedRecipes);
+        if (selectedIndices.length === 0) {
+          alert("Please select at least one recipe.");
+          return;
+        }
+
+        const ingredientMap = new Map();
+        selectedIndices.forEach(idx => {
+          window._recipes[idx].ingredients.forEach(ing => {
+            const key = ing.name + "||" + ing.unit;
+            const existing = ingredientMap.get(key);
+            const amount = parseFloat(ing.amount);
+            if (existing) {
+              existing.amount += amount;
+            } else {
+              ingredientMap.set(key, {
+                name: ing.name,
+                unit: ing.unit,
+                amount: amount
+              });
+            }
+          });
+        });
+
+        $("#ingredientsList").html(`<div class="text-center">🔍 Searching Kroger...</div>`);
+
+        try {
+          const results = [];
+          for (const [key, ing] of ingredientMap.entries()) {
+            const data = await searchProducts(selectedStoreId, ing.name);
+            results.push(data ?? { term: ing.name, locations: [], products: [] });
+          }
+
+          const grouped = groupIngredientsSmartly(results, ingredientMap);
+          renderIngredients(grouped);
+        } catch (err) {
+          console.error(err);
+          $("#ingredientsList").html(`<div class="text-danger">Failed to fetch products.</div>`);
+        }
+      });
+
+      async function searchProducts(locationId, term) {
+        try {
+          const res = await fetch(`${API_BASE}/products?locationId=${locationId}&term=${encodeURIComponent(term)}`);
+          const data = await res.json();
+          if (!data.data) return null;
+          const products = data.data.filter(p => p.aisleLocations?.length);
+          return { term, products };
+        } catch (err) {
+          console.error(`Failed to fetch product: ${term}`, err);
+          return null;
+        }
+      }
+
+      function groupIngredientsSmartly(productResults, ingredientMap) {
+        const aisleStats = {}; // count how many ingredients per aisle
+        const aisleIngredients = {}; // ingredients grouped by aisle
+
+        const termToAisles = {}; // track all aisles for each term
+
+        productResults.forEach(({ term, products }) => {
+          const aisles = new Set();
+
+          products.forEach(p => {
+            p.aisleLocations.forEach(loc => {
+              const aisle = loc.description?.toUpperCase().trim() || "OTHER";
+              if (!aisleStats[aisle]) aisleStats[aisle] = 0;
+              aisleStats[aisle]++;
+              aisles.add(aisle);
+            });
+          });
+
+          termToAisles[term] = Array.from(aisles);
+        });
+
+        const primaryAislePerTerm = {};
+        for (const [term, aisles] of Object.entries(termToAisles)) {
+          primaryAislePerTerm[term] = aisles.sort((a, b) => (aisleStats[b] || 0) - (aisleStats[a] || 0))[0] || "UNKNOWN";
+        }
+
+        const finalGrouped = {};
+        for (const [key, ing] of ingredientMap.entries()) {
+          const primaryAisle = primaryAislePerTerm[ing.name] || "UNKNOWN";
+          const also = termToAisles[ing.name]?.filter(a => a !== primaryAisle) || [];
+
+          const bayText = also.length ? ` (also in ${also.join(", ")})` : "";
+          const line = `${capitalize(ing.name)} (${ing.amount}${ing.unit})${bayText}`;
+
+          if (!finalGrouped[primaryAisle]) finalGrouped[primaryAisle] = [];
+          finalGrouped[primaryAisle].push(line);
+        }
+
+        return Object.entries(finalGrouped).sort((a, b) => {
+          const getNum = str => (str.match(/AISLE\s+(\d+)/i) || [])[1] || str;
+          return getNum(a[0]) > getNum(b[0]) ? 1 : -1;
+        });
+      }
+      function renderIngredients(groupedIngredients) {
+        let output = "";
+        for (const [aisle, ingredients] of Object.entries(groupedIngredients)) {
+          output += `<strong>${aisle}</strong><ul>`;
+          ingredients.forEach(item => {
+            output += `<li>${item}</li>`;
+          });
+          output += `</ul>`;
+        }
+        $("#ingredientsList").html(output || `<div class="text-center">No products found.</div>`);
+      }
+
+      function capitalize(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+      }
+    });
+  </script>
+</body>
+</html>

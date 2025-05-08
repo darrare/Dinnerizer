@@ -1,0 +1,285 @@
+[
+  {
+    "name": "Garlic Chicken & Broccoli",
+    "description": "This is a placeholder description for Garlic Chicken & Broccoli.",
+    "time": "30 min",
+    "imageUrl": "images/garlicChickenAndBroccoli.png",
+    "ingredients": [
+      { "name": "chicken breast", "amount": "1", "unit": "lb" },
+      { "name": "garlic", "amount": "1", "unit": "clove" },
+      { "name": "broccoli", "amount": "6", "unit": "oz" },
+      { "name": "olive oil", "amount": "2", "unit": "oz" }
+    ],
+    "instructions": [
+      "Heat olive oil in a large skillet over medium heat.",
+      "Season chicken breast with salt and pepper, then cook until golden brown on both sides.",
+      "Add garlic and cook for 1-2 minutes until fragrant.",
+      "Add broccoli and cook until tender, about 5-7 minutes.",
+      "Serve hot with your choice of side."
+    ]
+  },
+  {
+    "name": "Spaghetti Bolognese",
+    "description": "A classic Italian pasta dish with ground beef and tomato sauce.",
+    "time": "45 min",
+    "imageUrl": "images/spaghettiBolognese.png",
+    "ingredients": [
+      { "name": "ground beef", "amount": "1", "unit": "lb" },
+      { "name": "spaghetti", "amount": "8", "unit": "oz" },
+      { "name": "tomato sauce", "amount": "12", "unit": "oz" },
+      { "name": "onion", "amount": "1", "unit": "medium" },
+      { "name": "garlic", "amount": "2", "unit": "cloves" }
+    ],
+    "instructions": [
+      "Brown the ground beef in a large pan over medium heat, breaking it apart with a spoon.",
+      "Add chopped onion and garlic, cooking until softened.",
+      "Stir in tomato sauce and let it simmer for 20-25 minutes, adding salt and pepper to taste.",
+      "Meanwhile, cook spaghetti according to package instructions.",
+      "Serve the sauce over the cooked spaghetti and enjoy!"
+    ],
+    "dietaryRestrictions": [
+      "dairyFree"
+    ]
+  },
+  {
+    "name": "Veggie Stir Fry",
+    "description": "Quick and healthy stir fry with fresh veggies and tofu.",
+    "time": "25 min",
+    "imageUrl": "images/veggieStirFry.png",
+    "ingredients": [
+      { "name": "carrot", "amount": "1", "unit": "large" },
+      { "name": "bell pepper", "amount": "1", "unit": "" },
+      { "name": "broccoli", "amount": "6", "unit": "oz" },
+      { "name": "soy sauce", "amount": "3", "unit": "tbsp" },
+      { "name": "tofu", "amount": "1", "unit": "block" }
+    ],
+    "instructions": [
+      "Press tofu to remove excess moisture, then cut into cubes.",
+      "Heat some oil in a wok or large pan over medium-high heat.",
+      "Add tofu and cook until golden brown on all sides.",
+      "Add sliced carrots, bell pepper, and broccoli, and stir fry for about 5 minutes.",
+      "Add soy sauce and stir to coat the veggies and tofu.",
+      "Cook for another 2-3 minutes, then serve hot."
+    ],
+    "dietaryRestrictions": [
+      "vegetarian",
+      "glutenFree",
+      "dairyFree"
+    ]
+  },
+  {
+    "name": "Chicken Alfredo",
+    "description": "A creamy pasta dish made with chicken, garlic, and a rich Alfredo sauce.",
+    "time": "35 min",
+    "imageUrl": "images/chickenAlfredo.png",
+    "ingredients": [
+      { "name": "chicken breast", "amount": "2", "unit": "lb" },
+      { "name": "fettuccine pasta", "amount": "8", "unit": "oz" },
+      { "name": "butter", "amount": "4", "unit": "tbsp" },
+      { "name": "heavy cream", "amount": "1", "unit": "cup" },
+      { "name": "parmesan cheese", "amount": "1", "unit": "cup" }
+    ],
+    "instructions": [
+      "Cook pasta according to package instructions.",
+      "In a skillet, melt butter over medium heat and cook chicken until golden brown.",
+      "Add garlic and cook until fragrant.",
+      "Pour in heavy cream and bring to a simmer.",
+      "Add parmesan cheese and stir until sauce thickens.",
+      "Serve the chicken and sauce over the cooked pasta."
+    ]
+  },
+  {
+    "name": "Beef Tacos",
+    "description": "Ground beef seasoned with taco spices, served in a soft or hard taco shell.",
+    "time": "20 min",
+    "imageUrl": "images/beefTacos.png",
+    "ingredients": [
+      { "name": "ground beef", "amount": "1", "unit": "lb" },
+      { "name": "taco seasoning", "amount": "1", "unit": "packet" },
+      { "name": "taco shells", "amount": "8", "unit": "" },
+      { "name": "cheddar cheese", "amount": "1", "unit": "cup" },
+      { "name": "lettuce", "amount": "1", "unit": "cup" }
+    ],
+    "instructions": [
+      "Brown the ground beef in a skillet over medium heat.",
+      "Add taco seasoning and water as directed on the packet, cook for 5 minutes.",
+      "Warm taco shells according to package instructions.",
+      "Fill taco shells with beef and top with cheese, lettuce, and your favorite toppings."
+    ]
+  },
+  {
+    "name": "Chicken Caesar Salad",
+    "description": "A fresh and healthy salad with grilled chicken, romaine, croutons, and Caesar dressing.",
+    "time": "20 min",
+    "imageUrl": "images/chickenCaesarSalad.png",
+    "ingredients": [
+      { "name": "chicken breast", "amount": "1", "unit": "lb" },
+      { "name": "romaine lettuce", "amount": "4", "unit": "cups" },
+      { "name": "croutons", "amount": "1", "unit": "cup" },
+      { "name": "Caesar dressing", "amount": "1/4", "unit": "cup" },
+      { "name": "parmesan cheese", "amount": "1/4", "unit": "cup" }
+    ],
+    "instructions": [
+      "Grill or cook chicken breast and slice thinly.",
+      "Toss lettuce, croutons, and Caesar dressing together.",
+      "Top with sliced chicken and sprinkle with parmesan cheese."
+    ]
+  },
+  {
+    "name": "Vegetable Soup",
+    "description": "A hearty and healthy vegetable soup with carrots, potatoes, and beans.",
+    "time": "40 min",
+    "imageUrl": "images/vegetableSoup.png",
+    "ingredients": [
+      { "name": "carrots", "amount": "2", "unit": "medium" },
+      { "name": "potatoes", "amount": "3", "unit": "medium" },
+      { "name": "green beans", "amount": "1", "unit": "cup" },
+      { "name": "tomato", "amount": "1", "unit": "can" },
+      { "name": "vegetable broth", "amount": "4", "unit": "cups" }
+    ],
+    "instructions": [
+      "Chop the vegetables into small pieces.",
+      "In a large pot, combine all ingredients with vegetable broth.",
+      "Bring to a boil, then simmer for 30 minutes, or until vegetables are tender."
+    ],
+    "dietaryRestrictions": [
+      "vegetarian",
+      "glutenFree",
+      "dairyFree"
+    ]
+  },
+  {
+    "name": "Chicken Stir Fry",
+    "description": "Stir fry with chicken, vegetables, and a savory soy sauce.",
+    "time": "30 min",
+    "imageUrl": "images/chickenStirFry.png",
+    "ingredients": [
+      { "name": "chicken breast", "amount": "1", "unit": "lb" },
+      { "name": "bell pepper", "amount": "1", "unit": "large" },
+      { "name": "broccoli", "amount": "6", "unit": "oz" },
+      { "name": "soy sauce", "amount": "2", "unit": "tbsp" },
+      { "name": "rice", "amount": "1", "unit": "cup" }
+    ],
+    "instructions": [
+      "Slice the chicken and vegetables into small pieces.",
+      "In a wok, heat oil over medium-high heat and cook chicken until browned.",
+      "Add vegetables and cook for 5-7 minutes.",
+      "Stir in soy sauce and cook for another 2 minutes.",
+      "Serve over cooked rice."
+    ]
+  },
+  {
+    "name": "Fried Rice",
+    "description": "A quick and tasty fried rice dish with vegetables, egg, and soy sauce.",
+    "time": "20 min",
+    "imageUrl": "images/friedRice.png",
+    "ingredients": [
+      { "name": "rice", "amount": "2", "unit": "cups" },
+      { "name": "egg", "amount": "2", "unit": "" },
+      { "name": "carrot", "amount": "1", "unit": "medium" },
+      { "name": "soy sauce", "amount": "3", "unit": "tbsp" },
+      { "name": "green onion", "amount": "2", "unit": "stalks" }
+    ],
+    "instructions": [
+      "Cook the rice and set aside.",
+      "In a large pan, scramble the eggs until fully cooked.",
+      "Add diced carrots and green onions and cook for 2-3 minutes.",
+      "Add the rice and soy sauce, stir to combine, and cook for 5 minutes."
+    ],
+    "dietaryRestrictions": [
+      "vegetarian",
+      "dairyFree"
+    ]
+  },
+  {
+    "name": "Baked Salmon",
+    "description": "A simple and healthy baked salmon with lemon and herbs.",
+    "time": "25 min",
+    "imageUrl": "images/bakedSalmon.png",
+    "ingredients": [
+      { "name": "salmon fillets", "amount": "2", "unit": "pieces" },
+      { "name": "lemon", "amount": "1", "unit": "medium" },
+      { "name": "olive oil", "amount": "2", "unit": "tbsp" },
+      { "name": "garlic", "amount": "2", "unit": "cloves" }
+    ],
+    "instructions": [
+      "Preheat the oven to 375°F.",
+      "Place salmon fillets on a baking sheet and drizzle with olive oil.",
+      "Season with garlic, lemon juice, salt, and pepper.",
+      "Bake for 20-25 minutes or until salmon is cooked through."
+    ],
+    "dietaryRestrictions": [
+      "glutenFree",
+      "dairyFree"
+    ]
+  },
+  {
+    "name": "Pasta Primavera",
+    "description": "A light and refreshing pasta dish with seasonal vegetables and olive oil.",
+    "time": "30 min",
+    "imageUrl": "images/pastaPrimavera.png",
+    "ingredients": [
+      { "name": "penne pasta", "amount": "8", "unit": "oz" },
+      { "name": "zucchini", "amount": "1", "unit": "medium" },
+      { "name": "yellow squash", "amount": "1", "unit": "medium" },
+      { "name": "olive oil", "amount": "3", "unit": "tbsp" },
+      { "name": "parmesan cheese", "amount": "1/4", "unit": "cup" }
+    ],
+    "instructions": [
+      "Cook pasta according to package instructions.",
+      "In a pan, sauté zucchini and squash in olive oil until tender.",
+      "Toss the cooked pasta with the vegetables and top with parmesan cheese."
+    ]
+  },
+  {
+    "name": "BBQ Chicken",
+    "description": "Grilled chicken slathered in smoky barbecue sauce.",
+    "time": "35 min",
+    "imageUrl": "images/bbqChicken.png",
+    "ingredients": [
+      { "name": "chicken breast", "amount": "2", "unit": "pieces" },
+      { "name": "barbecue sauce", "amount": "1", "unit": "cup" }
+    ],
+    "instructions": [
+      "Grill chicken breasts until cooked through.",
+      "Brush with barbecue sauce during the last few minutes of grilling."
+    ]
+  },
+  {
+    "name": "Shrimp Tacos",
+    "description": "Tacos filled with spicy shrimp, avocado, and a tangy slaw.",
+    "time": "25 min",
+    "imageUrl": "images/shrimpTacos.png",
+    "ingredients": [
+      { "name": "shrimp", "amount": "1", "unit": "lb" },
+      { "name": "taco shells", "amount": "8", "unit": "" },
+      { "name": "avocado", "amount": "1", "unit": "" },
+      { "name": "cabbage", "amount": "2", "unit": "cups" }
+    ],
+    "instructions": [
+      "Season and cook shrimp until pink and cooked through.",
+      "Fill taco shells with shrimp, sliced avocado, and cabbage slaw."
+    ]
+  },
+  {
+    "name": "Lentil Soup",
+    "description": "A nutritious and hearty soup made with lentils and vegetables.",
+    "time": "40 min",
+    "imageUrl": "images/lentilSoup.png",
+    "ingredients": [
+      { "name": "lentils", "amount": "1", "unit": "cup" },
+      { "name": "carrots", "amount": "2", "unit": "medium" },
+      { "name": "celery", "amount": "2", "unit": "stalks" },
+      { "name": "vegetable broth", "amount": "4", "unit": "cups" }
+    ],
+    "instructions": [
+      "Combine all ingredients in a large pot.",
+      "Simmer for 30-40 minutes until lentils are tender."
+    ],
+    "dietaryRestrictions": [
+      "vegetarian",
+      "glutenFree",
+      "dairyFree"
+    ]
+  }
+]

@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dinnerizer</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1046/1046750.png" />
+  <meta name="description" content="Dinnerizer helps you plan meals and find ingredients at your local Kroger store." />
+  <meta name="author" content="Your Name" />
+  <link href="https://bootswatch.com/5/sketchy/bootstrap.min.css" rel="stylesheet" />
+  <link href="styles.css" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="container py-4">
+    <h1>Dinnerizer 🍽</h1>
+
+    <!-- Filters Section -->
+    <div class="filters">
+      <input type="text" id="recipeSearch" placeholder="Search for recipes...">
+      <div class="dietaryFilters">
+        <label><input type="checkbox" id="vegetarian"> Vegetarian</label>
+        <label><input type="checkbox" id="glutenFree"> Gluten-Free</label>
+        <label><input type="checkbox" id="dairyFree"> Dairy-Free</label>
+      </div>
+    </div>
+
+    <!-- Recipe Section -->
+    <section id="recipe-section" class="mb-5">
+      <h2>Select Your Recipes 🥄</h2>
+      <div class="recipeList" id="recipes"></div>
+    </section>
+
+    <section id="store-section" class="mb-5">
+      <h2>Find Nearby Kroger Stores 🏪</h2>
+      <div class="d-grid mb-3">
+        <button class="btn btn-primary" id="locateStores">Use My Location</button>
+      </div>
+      <ul id="storeList" class="list-group mb-2"></ul>
+    </section>
+
+    <section id="results-section" class="mb-5">
+      <h2>Your In-Store Shopping List 🛒</h2>
+      <div class="d-grid mb-3">
+        <button class="btn btn-success" id="fetchIngredients">Get Ingredients</button>
+      </div>
+      <div id="ingredientsList"></div>
+    </section>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="dinnerizer.js"></script>
+</body>
+</html>
