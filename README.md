@@ -1,3 +1,3 @@
-### What is Luncherizer?
+### What is Dinnerizer?
 
-I'm tired of trying to make decisions on where to go get lunch... So I made this app.
+Queries Kroger's API to help me make lists for dinner.
